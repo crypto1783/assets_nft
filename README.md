@@ -1,3 +1,7 @@
+# run with docker compose
+
+docker-compose -p ticket -f docker-compose.yml up
+
 # Substrate Node Template
 
 A fresh FRAME-based [Substrate](https://www.substrate.io/) node, ready for hacking :rocket:
