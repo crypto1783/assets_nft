@@ -22,6 +22,7 @@ use pallet_grandpa::fg_primitives;
 use sp_version::RuntimeVersion;
 #[cfg(feature = "std")]
 use sp_version::NativeVersion;
+use frame_system::EnsureRoot;
 
 // A few exports that help ease life for downstream crates.
 #[cfg(any(feature = "std", test))]
@@ -292,6 +293,34 @@ impl nft::Config for Runtime{
 	type Event = Event;
 }
 
+parameter_types! {
+    pub const MaxWellKnownNodes: u32 = 8;
+    pub const MaxPeerIdLength: u32 = 128;
+}
+
+impl pallet_node_authorization::Config for Runtime {
+    type Event = Event;
+    type MaxWellKnownNodes = MaxWellKnownNodes;
+    type MaxPeerIdLength = MaxPeerIdLength;
+    type AddOrigin = EnsureRoot<AccountId>;
+    type RemoveOrigin = EnsureRoot<AccountId>;
+    type SwapOrigin = EnsureRoot<AccountId>;
+    type ResetOrigin = EnsureRoot<AccountId>;
+    type WeightInfo = ();
+}
+
+// parameter_types! {
+//     pub const EpochDuration: u64 = EPOCH_DURATION_IN_SLOTS;
+//     pub const ExpectedBlockTime: u64 = MILLISECS_PER_BLOCK;
+// }
+
+// impl babe::Config for Runtime {
+//     type EpochDuration = EpochDuration;
+//     type ExpectedBlockTime = ExpectedBlockTime;
+//     type EpochChangeTrigger = babe::SameAuthoritiesForever;
+// }
+
+
 // impl pallet_nft::Config for Runtime {
 // 	type Event = Event;
 // }
@@ -316,6 +345,8 @@ construct_runtime!(
 		PoeModule2: pallet_poe::{Module, Call, Storage, Event<T>},
 		Nft: orml_nft::{Module, Call, Storage},
 		GwiTicket: nft::{Module, Call, Storage, Event<T>},
+		//Babe: pallet_babe::{Module, Call, Storage, Event<T>},
+		NodeAuthorization: pallet_node_authorization::{Module, Call, Storage, Event<T>, Config<T>},
 	}
 );
 
