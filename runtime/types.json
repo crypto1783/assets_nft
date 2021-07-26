@@ -67,6 +67,7 @@
     },
   
     "ClassDataOf": "ItemClassData",
-    "TokenDataOf": "ItemTokenData"
+    "TokenDataOf": "ItemTokenData",
+    "PeerId": "(Vec<u8>)"
   
   }

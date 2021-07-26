@@ -45,6 +45,10 @@ pub fn authority_keys_from_seed(s: &str) -> (AuraId, GrandpaId) {
 pub fn development_config() -> Result<ChainSpec, String> {
 	let wasm_binary = WASM_BINARY.ok_or_else(|| "Development wasm not available".to_string())?;
 
+	let mut prop = sc_service::Properties::new();
+	prop.insert("tokenDecimals".to_string(), 12.into());
+	prop.insert("tokenSymbol".to_string(), "NMT".into()); // NFT Mart Token
+
 	Ok(ChainSpec::from_genesis(
 		// Name
 		"Development-gwi",
@@ -73,9 +77,9 @@ pub fn development_config() -> Result<ChainSpec, String> {
 		// Telemetry
 		None,
 		// Protocol ID
-		None,
+		Some("gwiTicket"),,
 		// Properties
-		None,
+		Some(prop),
 		// Extensions
 		None,
 	))
@@ -86,9 +90,9 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 
 	Ok(ChainSpec::from_genesis(
 		// Name
-		"Local Testnet",
+		"Gwi Testnet",
 		// ID
-		"local_testnet",
+		"Gwi_testnet",
 		ChainType::Local,
 		move || testnet_genesis(
 			wasm_binary,
@@ -96,6 +100,7 @@ pub fn local_testnet_config() -> Result<ChainSpec, String> {
 			vec![
 				authority_keys_from_seed("Alice"),
 				authority_keys_from_seed("Bob"),
+				authority_keys_from_seed("Charlie"),
 			],
 			// Sudo account
 			get_account_id_from_seed::<sr25519::Public>("Alice"),
