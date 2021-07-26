@@ -77,7 +77,7 @@ pub fn development_config() -> Result<ChainSpec, String> {
 		// Telemetry
 		None,
 		// Protocol ID
-		Some("gwiTicket"),,
+		Some("gwiTicket"),
 		// Properties
 		Some(prop),
 		// Extensions
