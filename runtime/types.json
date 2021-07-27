@@ -42,10 +42,7 @@
   
     "ItemTokenData": {
       "name": "Vec<u8>",
-      "attack": "u64",
-      "defense": "u64",
-      "speed": "u64",
-      "dexterity": "u64"
+      "price": "u64"
     },
   
     "TokenData": "ItemTokenData",
