@@ -47,7 +47,7 @@ pub fn development_config() -> Result<ChainSpec, String> {
 
 	let mut prop = sc_service::Properties::new();
 	prop.insert("tokenDecimals".to_string(), 12.into());
-	prop.insert("tokenSymbol".to_string(), "NMT".into()); // NFT Mart Token
+	prop.insert("tokenSymbol".to_string(), "Gcoin".into()); // Token
 
 	Ok(ChainSpec::from_genesis(
 		// Name
@@ -85,9 +85,60 @@ pub fn development_config() -> Result<ChainSpec, String> {
 	))
 }
 
+pub fn pub_testnet_config() -> Result<ChainSpec, String> {
+
+	let wasm_binary = WASM_BINARY.ok_or_else(|| "Live wasm not available".to_string())?;
+
+	let mut prop = sc_service::Properties::new();
+	prop.insert("tokenDecimals".to_string(), 12.into());
+	prop.insert("tokenSymbol".to_string(), "Gcoin".into());
+	Ok(ChainSpec::from_genesis(
+		// Name
+		"GWI live net",
+		// ID
+		"GWI liveNet Id",
+		ChainType::Live,
+		move || testnet_genesis(
+			wasm_binary,
+			// Initial PoA authorities
+			vec![
+				authority_keys_from_seed("Alice"),
+				authority_keys_from_seed("Bob"),
+				authority_keys_from_seed("Charlie"),
+			],
+			// Sudo account
+			get_account_id_from_seed::<sr25519::Public>("Alice"),
+			// Pre-funded accounts
+			vec![
+				get_account_id_from_seed::<sr25519::Public>("Alice"),
+				get_account_id_from_seed::<sr25519::Public>("Bob"),
+				get_account_id_from_seed::<sr25519::Public>("Charlie"),
+				get_account_id_from_seed::<sr25519::Public>("Dave"),
+			],
+			true,
+		),
+		// Bootnodes
+		vec![],
+		// Telemetry
+		None,
+		// Protocol ID
+		Some("GWI testNet"),
+		// Properties
+		Some(prop),
+		// Extensions
+		Default::default(),
+	))
+
+
+	
+}
+
 pub fn local_testnet_config() -> Result<ChainSpec, String> {
 	let wasm_binary = WASM_BINARY.ok_or_else(|| "Development wasm not available".to_string())?;
 
+	let mut prop = sc_service::Properties::new();
+	prop.insert("tokenDecimals".to_string(), 12.into());
+	prop.insert("tokenSymbol".to_string(), "Gcoin".into());
 	Ok(ChainSpec::from_genesis(
 		// Name
 		"Gwi Testnet",
