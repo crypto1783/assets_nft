@@ -15,10 +15,9 @@ use crate::{AccountId};
 #[derive(Encode, Decode, Eq, PartialEq, Copy, Clone, RuntimeDebug, PartialOrd, Ord)]
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub enum ItemType {
-	Weapon,
-	HeadGear,
-	Armor,
-	Shoe
+	Check,
+	Ticket,
+	DebtReceivable,
 }
 
 #[derive(Encode, Decode, Eq, PartialEq, Clone, RuntimeDebug, PartialOrd, Ord)]
