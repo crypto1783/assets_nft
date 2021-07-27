@@ -1,15 +1,15 @@
-////这个要仔细学习下是啥
+////TODO
 #![cfg_attr(not(feature = "std"), no_std)]
 
 use codec::{Decode, Encode};
 
-//这个要仔细学习下是啥
+//TODO
 #[cfg(feature = "std")]
 use serde::{Deserialize, Serialize};
 use sp_std::prelude::*;
 use sp_runtime::{RuntimeDebug};
 
-//这是哪里来的？
+//where
 use crate::{AccountId};
 
 #[derive(Encode, Decode, Eq, PartialEq, Copy, Clone, RuntimeDebug, PartialOrd, Ord)]
