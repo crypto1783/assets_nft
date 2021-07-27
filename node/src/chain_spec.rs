@@ -223,6 +223,10 @@ fn testnet_genesis(
                     OpaquePeerId(bs58::decode("12D3KooWQYV9dGMFoRzNStwpXztXaBUjtPqi6aU76ZgUriHhKust").into_vec().unwrap()),
                     endowed_accounts[1].clone()
                 ),
+				(
+                    OpaquePeerId(bs58::decode("12D3KooWJvyP3VJYymTqG7eH4PM5rN4T2agk5cdNCfNymAqwqcvZ").into_vec().unwrap()),
+                    endowed_accounts[1].clone()
+                ),
             ],
         }),
 
