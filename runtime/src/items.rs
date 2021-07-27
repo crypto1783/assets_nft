@@ -31,10 +31,7 @@ pub struct ItemClassData {
 #[cfg_attr(feature = "std", derive(Serialize, Deserialize))]
 pub struct ItemTokenData {
 	pub name: Vec<u8>,
-	pub attack: u64,
-	pub defense: u64,
-	pub speed: u64,
-	pub dexterity: u64,
+	pub price: u64,
 }
 
 // This is returning the testnet genesis config
