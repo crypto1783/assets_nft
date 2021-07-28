@@ -47,7 +47,7 @@ pub fn items_genesis(owner: &AccountId) ->
 		owner.clone(),
 		b"sword".to_vec(),
 		ItemClassData {
-			item_type: ItemType::Weapon,
+			item_type: ItemType::Check,
 			info: b"Sword".to_vec(),
 		},
 		vec![(
@@ -55,27 +55,23 @@ pub fn items_genesis(owner: &AccountId) ->
 			b"iron_sword".to_vec(),
 			ItemTokenData {
 				name: b"Iron Sword".to_vec(),
-				attack: 7,
-				defense: 0,
-				speed: 0,
-				dexterity: 0
+				price: 7,
+
 			}
 		), (
 			owner.clone(),
 			b"steel_sword".to_vec(),
 			ItemTokenData {
 				name: b"Steel Sword".to_vec(),
-				attack: 14,
-				defense: 0,
-				speed: 0,
-				dexterity: 2
+				price: 14,
+
 			}
 		)]
 	), (
 		owner.clone(),
 		b"hat".to_vec(),
 		ItemClassData {
-			item_type: ItemType::HeadGear,
+			item_type: ItemType::Ticket,
 			info: b"Hat".to_vec(),
 		},
 		vec![]
