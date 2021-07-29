@@ -1,3 +1,5 @@
+
+
 # run with docker compose
 
 docker-compose -p ticket -f docker-compose.yml up
@@ -187,3 +189,12 @@ by appending your own. A few useful ones are as follow.
 # Check whether the code is compilable
 ./scripts/docker_run.sh cargo check
 ```
+
+
+# insert session
+
+curl http://localhost:9933 -H "Content-Type:application/json;charset=utf-8" -d "@aura.json";curl http://localhost:9933 -H "Content-Type:application/json;charset=utf-8" -d "@gran.json"
+
+# Export the gwi chain spec to json
+./target/release/node-template build-spec --disable-default-bootnode --chain gwi > gwi.json
+./target/release/node-template build-spec --chain=gwi.json --raw --disable-default-bootnode > gwiRaw.json
