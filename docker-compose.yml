@@ -15,3 +15,17 @@ services:
         source: ./.local
         target: /root/.local
     command: bash -c "cargo build --release && ./target/release/node-template --dev --unsafe-ws-external --rpc-cors=all --unsafe-rpc-external --rpc-methods=Unsafe --pruning=archive"
+  gwilive:
+    container_name: node-template
+    image: paritytech/ci-linux:974ba3ac-20201006
+    working_dir: /var/www/node-template
+    ports:
+      - "9944:9944"
+    environment:
+      - CARGO_HOME=/var/www/node-template/.cargo
+    volumes:
+      - .:/var/www/node-template
+      - type: bind
+        source: ./.local
+        target: /root/.local
+    command: bash -c "cargo build --release"  
