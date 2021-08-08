@@ -15,7 +15,7 @@ services:
     - 9933:9933
     command:
     - --chain=/gwiRaw.json
-    - --name=${NAME:-changeme}
+    - --name=${NAME:-name}
     - --base-path=/home/data/
     - --validator
     - --ws-port=9944
@@ -26,4 +26,31 @@ services:
     - --execution=NativeElseWasm
     - --rpc-methods=Unsafe
     - --unsafe-ws-external
+    - --bootnodes=/ip4/45.32.147.48/tcp/30334/p2p/12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2
+  fullnode:
+    restart: always
+    image: xiajianle/gwinode:v1.0
+    volumes:
+    - /etc/localtime:/etc/localtime
+    - ./entrypoint.sh:/entrypoint.sh
+    - ./gwiRaw.json/:/gwiRaw.json
+    - .:/home/config
+    ports:
+    - 30333:30333
+    - 9944:9944
+    - 9933:9933
+    command:
+    - --chain=/gwiRaw.json
+    - --name=fullnode
+    - --base-path=/home/data/
+    - --pruning=archive
+    - --ws-port=9944
+    - --port=30333
+    - --rpc-port=9933
+    - --node-key=a99331ff4f0e0a0434a6263da0a5823ea3afcfffe590c9f3014e6cf620f2b19a
+    - --telemetry-url=wss://telemetry.polkadot.io/submit/ 0
+    - --execution=NativeElseWasm
+    - --rpc-methods=Unsafe
+    - --unsafe-ws-external
+    - --rpc-cors=all 
     - --bootnodes=/ip4/45.32.147.48/tcp/30334/p2p/12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2
