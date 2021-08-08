@@ -9,7 +9,7 @@ services:
     - ./entrypoint.sh:/entrypoint.sh
     - ./gwiRaw.json/:/gwiRaw.json
     ports:
-    - 30333:30334
+    - 30333:30333
     - 9944:9944
     command:
     - --chain=/gwiRaw.json
@@ -18,4 +18,4 @@ services:
     - --validator
     - --ws-port=9944
     - --port=30333
-    - --node-key=${NODEKE:-nodekey}
+    - --node-key=${NODEKEY:-nodekey}
