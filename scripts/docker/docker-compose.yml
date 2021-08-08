@@ -8,6 +8,7 @@ services:
     - /etc/localtime:/etc/localtime
     - ./entrypoint.sh:/entrypoint.sh
     - ./gwiRaw.json/:/gwiRaw.json
+    - .:.
     ports:
     - 30333:30333
     - 9944:9944
