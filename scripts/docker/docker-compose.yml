@@ -11,6 +11,7 @@ services:
     ports:
     - 30333:30333
     - 9944:9944
+    entrypoint: [ "/entrypoint.sh" ]
     command:
     - --chain=/gwiRaw.json
     - --name=${NAME:-changeme}
