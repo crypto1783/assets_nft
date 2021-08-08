@@ -8,10 +8,11 @@ services:
     - /etc/localtime:/etc/localtime
     - ./entrypoint.sh:/entrypoint.sh
     - ./gwiRaw.json/:/gwiRaw.json
-    - .:.
+    - .:/home/config
     ports:
     - 30333:30333
     - 9944:9944
+    - 9933:9933
     command:
     - --chain=/gwiRaw.json
     - --name=${NAME:-changeme}
@@ -19,6 +20,7 @@ services:
     - --validator
     - --ws-port=9944
     - --port=30333
+    - --rpc-port=9933
     - --node-key=${NODEKEY:-nodekey}
     - --telemetry-url="wss://telemetry.polkadot.io/submit/ 0"
     - --execution=NativeElseWasm
