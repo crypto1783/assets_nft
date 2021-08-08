@@ -198,3 +198,6 @@ curl http://localhost:9933 -H "Content-Type:application/json;charset=utf-8" -d "
 # Export the gwi chain spec to json
 ./target/release/node-template build-spec --disable-default-bootnode --chain gwi > gwi.json
 ./target/release/node-template build-spec --chain=gwi.json --raw --disable-default-bootnode > gwiRaw.json
+
+# telemetry url
+https://telemetry.polkadot.io/#map/GWI%20live%20net
