@@ -32,7 +32,7 @@
     "TokenIdOf": "TokenId",
   
     "ItemType": {
-      "_enum": ["Weapon", "HeadGear", "Armor", "Shoe"]
+      "_enum": ["Check", "Ticket", "DebtReceivable"]
     },
   
     "ItemClassData": {
