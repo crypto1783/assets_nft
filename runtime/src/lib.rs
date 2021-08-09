@@ -228,7 +228,6 @@ impl pallet_grandpa::Config for Runtime {
 	type WeightInfo = ();
 }
 
-/// Define the types required by the Scheduler pallet.
 parameter_types! {
 	pub MaximumSchedulerWeight: Weight = 10_000_000;
 	pub const MaxScheduledPerBlock: u32 = 50;
