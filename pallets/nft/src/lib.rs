@@ -48,13 +48,15 @@ pub mod pallet {
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
 	pub enum Event<T: Config> {
 		/// Event documentation should end with an array that provides descriptive names for event
-        ItemMinted(T::AccountId, (T::ClassId, T::TokenId), Vec<u8>),
+        TokenMinted(T::AccountId, (T::ClassId, T::TokenId), Vec<u8>),
 
-        CateCrated(T::AccountId, T::ClassId, Vec<u8>),
+        ClassCrated(T::AccountId, T::ClassId, Vec<u8>),
 
-        ItemTransferred(T::AccountId, T::AccountId, (T::ClassId, T::TokenId)),
+        TokenTransferred(T::AccountId, T::AccountId, (T::ClassId, T::TokenId)),
 
-		ItemBurned(T::AccountId,(T::ClassId, T::TokenId)),
+		TokenBurned(T::AccountId,(T::ClassId, T::TokenId)),
+
+		ClassDestoryed(T::AccountId, T::ClassId),
 	}
 
 	// Errors inform users that something went wrong.
@@ -96,7 +98,7 @@ pub mod pallet {
             }
 
             let tid = orml_nft::Pallet::<T>::mint(&who, cid, metadata.clone(), data).map_err(|_| Error::<T>::MintItemError)?;
-            Self::deposit_event(Event::ItemMinted(who, (cid, tid), metadata));
+            Self::deposit_event(Event::TokenMinted(who, (cid, tid), metadata));
             Ok(().into())
 		}
 
@@ -105,7 +107,7 @@ pub mod pallet {
         {
             let who = ensure_signed(origin)?;
             let cid = orml_nft::Pallet::<T>::create_class(&who, class_name.clone(), class_data.clone())?;
-            Self::deposit_event(Event::CateCrated(who.clone(), cid, class_name.clone()));
+            Self::deposit_event(Event::ClassCrated(who.clone(), cid, class_name.clone()));
             Ok(().into())
         }
 
@@ -125,7 +127,7 @@ pub mod pallet {
 
 			// execute: actualize the transfer
 			orml_nft::Pallet::<T>::transfer(&who, &to, token.clone())?;
-			Self::deposit_event(Event::ItemTransferred(who, to, token));
+			Self::deposit_event(Event::TokenTransferred(who, to, token));
 			Ok(().into())
 		}
 
@@ -133,12 +135,19 @@ pub mod pallet {
 		pub fn burn(origin: OriginFor<T>, token:(ClassIdOf<T>, TokenIdOf<T>)) -> DispatchResultWithPostInfo
 		{
 			let who = ensure_signed(origin)?;
-	
 			orml_nft::Pallet::<T>::burn(&who, token)?;
-			
-			Self::deposit_event(Event::ItemBurned(who.clone(),(token.0,token.1)));
+			Self::deposit_event(Event::TokenBurned(who.clone(),(token.0,token.1)));
 			Ok(().into())
 
+		}
+
+		#[pallet::weight(10_000)]
+		pub fn destroy_class(origin: OriginFor<T>, class_id: ClassIdOf<T>) -> DispatchResultWithPostInfo
+		{
+			let who = ensure_signed(origin)?;
+			orml_nft::Pallet::<T>::destroy_class(&who, class_id)?;
+			Self::deposit_event(Event::ClassDestoryed(who, class_id));
+			Ok(().into())
 		}
 
 	}
