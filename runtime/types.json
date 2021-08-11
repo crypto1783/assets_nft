@@ -5,9 +5,8 @@
   "TokenIdOf": "TokenId",
   "ItemType": {
     "_enum": [
-      "Check",
-      "Ticket",
-      "DebtReceivable"
+      "physical",
+      "virtual"
     ]
   },
   "ItemClassData": {
@@ -15,8 +14,7 @@
     "info": "Vec<u8>"
   },
   "ItemTokenData": {
-    "name": "Vec<u8>",
-    "price": "u64"
+    "amount": "u64"
   },
   "TokenData": "ItemTokenData",
   "MaxClassMetadata": 1024,
