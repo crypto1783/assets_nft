@@ -71,9 +71,9 @@ pub mod pallet {
 
         NotClassOwner,
 
-        MintItemError,
+        MintError,
 
-        NotItemOwner,
+        NotTokenOwner,
 	}
 
 	#[pallet::hooks]
@@ -97,7 +97,7 @@ pub mod pallet {
                 return Err(Error::<T>::NotClassOwner)?
             }
 
-            let tid = orml_nft::Pallet::<T>::mint(&who, cid, metadata.clone(), data).map_err(|_| Error::<T>::MintItemError)?;
+            let tid = orml_nft::Pallet::<T>::mint(&who, cid, metadata.clone(), data).map_err(|_| Error::<T>::MintError)?;
             Self::deposit_event(Event::TokenMinted(who, (cid, tid), metadata));
             Ok(().into())
 		}
@@ -122,7 +122,7 @@ pub mod pallet {
 			// check: if the origin is the owner of the token, implicitly checking the existence of the
 			//   class and token ID
 			if !orml_nft::Pallet::<T>::is_owner(&who, token.clone()) {
-				Err(Error::<T>::NotItemOwner)?
+				Err(Error::<T>::NotTokenOwner)?
 			}
 
 			// execute: actualize the transfer
