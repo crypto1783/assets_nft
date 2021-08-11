@@ -52,7 +52,9 @@ pub mod pallet {
 
         CateCrated(T::AccountId, T::ClassId, Vec<u8>),
 
-        ItemTransferred(T::AccountId, T::AccountId, (T::ClassId, T::TokenId))
+        ItemTransferred(T::AccountId, T::AccountId, (T::ClassId, T::TokenId)),
+
+		ItemBurned(T::AccountId,(T::ClassId, T::TokenId)),
 	}
 
 	// Errors inform users that something went wrong.
@@ -83,7 +85,7 @@ pub mod pallet {
 		/// An example dispatchable that takes a singles value as a parameter, writes the value to
 		/// storage and emits an event. This function must be dispatched by a signed extrinsic.
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
-		pub fn mint_item(origin: OriginFor<T>, cid: ClassIdOf<T>, metadata: Vec<u8>, data: TokenDataOf<T>) -> DispatchResultWithPostInfo {
+		pub fn mint(origin: OriginFor<T>, cid: ClassIdOf<T>, metadata: Vec<u8>, data: TokenDataOf<T>) -> DispatchResultWithPostInfo {
 
             let who = ensure_signed(origin)?;
             //这里的<T>的用法？
@@ -99,7 +101,7 @@ pub mod pallet {
 		}
 
         #[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
-        pub fn create_cate(origin: OriginFor<T>, class_name: Vec<u8>, class_data: ClassDataOf<T>) -> DispatchResultWithPostInfo
+        pub fn create_class(origin: OriginFor<T>, class_name: Vec<u8>, class_data: ClassDataOf<T>) -> DispatchResultWithPostInfo
         {
             let who = ensure_signed(origin)?;
             let cid = orml_nft::Pallet::<T>::create_class(&who, class_name.clone(), class_data.clone())?;
@@ -108,7 +110,7 @@ pub mod pallet {
         }
 
         #[pallet::weight(10_000)]
-		pub fn transfer_item(
+		pub fn transfer(
 			origin: OriginFor<T>,
 			to: T::AccountId,
 			token: (ClassIdOf<T>, TokenIdOf<T>)
@@ -126,5 +128,18 @@ pub mod pallet {
 			Self::deposit_event(Event::ItemTransferred(who, to, token));
 			Ok(().into())
 		}
+
+		#[pallet::weight(10_000)]
+		pub fn burn(origin: OriginFor<T>, token:(ClassIdOf<T>, TokenIdOf<T>)) -> DispatchResultWithPostInfo
+		{
+			let who = ensure_signed(origin)?;
+	
+			orml_nft::Pallet::<T>::burn(&who, token)?;
+			
+			Self::deposit_event(Event::ItemBurned(who.clone(),(token.0,token.1)));
+			Ok(().into())
+
+		}
+
 	}
 }
