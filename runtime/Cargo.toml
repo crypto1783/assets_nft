@@ -45,8 +45,6 @@ sp-session = { default-features = false, version = '3.0.0' }
 sp-std = { default-features = false, version = '3.0.0' }
 sp-transaction-pool = { default-features = false, version = '3.0.0' }
 sp-version = { default-features = false, version = '3.0.0' }
-pallet-scheduler = { default-features = false, version = '3.0.0' }
-
 # local dependencies
 pallet-template = { default-features = false, path = '../pallets/template', version = '3.0.0' }
 pallet-poe = { default-features = false, path = '../pallets/poe', version = '3.0.0' }
@@ -101,5 +99,4 @@ std = [
     'sp-transaction-pool/std',
     'sp-version/std',
     'pallet-node-authorization/std',
-    'pallet-scheduler/std',
 ]

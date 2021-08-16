@@ -228,22 +228,6 @@ impl pallet_grandpa::Config for Runtime {
 	type WeightInfo = ();
 }
 
-parameter_types! {
-	pub MaximumSchedulerWeight: Weight = 10_000_000;
-	pub const MaxScheduledPerBlock: u32 = 50;
-  }
-  
-  /// Configure the runtime's implementation of the Scheduler pallet.
-  impl pallet_scheduler::Config for Runtime {
-	type Event = Event;
-	type Origin = Origin;
-	type PalletsOrigin = OriginCaller;
-	type Call = Call;
-	type MaximumWeight = MaximumSchedulerWeight;
-	type ScheduleOrigin = frame_system::EnsureRoot<AccountId>;
-	type MaxScheduledPerBlock = MaxScheduledPerBlock;
-	type WeightInfo = ();
-  }
 
 parameter_types! {
 	pub const MinimumPeriod: u64 = SLOT_DURATION / 2;
@@ -364,7 +348,6 @@ construct_runtime!(
 		GwiTicket: nft::{Module, Call, Storage, Event<T>},
 		//Babe: pallet_babe::{Module, Call, Storage, Event<T>},
 		NodeAuthorization: pallet_node_authorization::{Module, Call, Storage, Event<T>, Config<T>},
-		Scheduler: pallet_scheduler::{Module, Call, Storage, Event<T>},
 	}
 );
 
