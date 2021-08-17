@@ -3,7 +3,7 @@ version: "3.2"
 services:
   gwinode:
     restart: always
-    image: xiajianle/gwinode:v1.0
+    image: xiajianle/gwinode:v1.0.1
     volumes:
     - /etc/localtime:/etc/localtime
     - ./entrypoint.sh:/entrypoint.sh
