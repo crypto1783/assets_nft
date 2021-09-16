@@ -21,5 +21,18 @@
   "MaxTokenMetadata": 1024,
   "ClassDataOf": "ItemClassData",
   "TokenDataOf": "ItemTokenData",
-  "PeerId": "(Vec<u8>)"
+  "PeerId": "(Vec<u8>)",
+  "ClassInfoOf": {
+    "metadata": "BoundedVec<u8, MaxClassMetadata>",
+    "total_issuance": "TokenId",
+    "owner": "AccountId",
+    "data": "ItemClassData"
+  },
+  
+  "TokenInfoOf": {
+    "metadata": "BoundedVec<u8, MaxTokenMetadata>",
+    "owner": "AccountId",
+    "data": "ItemTokenData"
+  }
 }
+
