@@ -294,6 +294,11 @@ impl nft::Config for Runtime{
 	type Event = Event;
 }
 
+impl smart_cab::Config for Runtime{
+	type Event = Event;
+	type ContractCode = u64;
+}
+
 parameter_types! {
     pub const MaxWellKnownNodes: u32 = 8;
     pub const MaxPeerIdLength: u32 = 128;
@@ -348,6 +353,7 @@ construct_runtime!(
 		GwiTicket: nft::{Module, Call, Storage, Event<T>},
 		//Babe: pallet_babe::{Module, Call, Storage, Event<T>},
 		NodeAuthorization: pallet_node_authorization::{Module, Call, Storage, Event<T>, Config<T>},
+		SmartCab:smart_cab::{Module, Call, Storage, Event<T>},
 	}
 );
 

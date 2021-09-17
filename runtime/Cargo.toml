@@ -50,7 +50,7 @@ pallet-template = { default-features = false, path = '../pallets/template', vers
 pallet-poe = { default-features = false, path = '../pallets/poe', version = '3.0.0' }
 orml-nft = { default-features = false, path = '../pallets/orml-nft', version = '0.4.1-dev' }
 nft = { default-features = false, path = '../pallets/nft', version = '3.0.0' }
-
+smart-cab = { default-features = false, path = '../pallets/smart-cab', version = '3.0.0' }
 #pallet-nft = { default-features = false, path = '../pallets/nft', version = '3.0.0' }
 
 
