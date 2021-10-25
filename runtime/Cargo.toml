@@ -34,6 +34,7 @@ pallet-sudo = { default-features = false, version = '3.0.0' }
 pallet-timestamp = { default-features = false, version = '3.0.0' }
 pallet-transaction-payment = { default-features = false, version = '3.0.0' }
 pallet-transaction-payment-rpc-runtime-api = { default-features = false, version = '3.0.0' }
+pallet-session = { default-features = false, version = '3.0.0' }
 sp-api = { default-features = false, version = '3.0.0' }
 sp-block-builder = { default-features = false, version = '3.0.0' }
 sp-consensus-aura = { default-features = false, version = '0.9.0' }
@@ -51,6 +52,7 @@ pallet-poe = { default-features = false, path = '../pallets/poe', version = '3.0
 orml-nft = { default-features = false, path = '../pallets/orml-nft', version = '0.4.1-dev' }
 nft = { default-features = false, path = '../pallets/nft', version = '3.0.0' }
 smart-cab = { default-features = false, path = '../pallets/smart-cab', version = '3.0.0' }
+add-validator = { default-features = false, path = '../pallets/add-validator', version = '3.0.0' }
 #pallet-nft = { default-features = false, path = '../pallets/nft', version = '3.0.0' }
 
 
@@ -99,4 +101,6 @@ std = [
     'sp-transaction-pool/std',
     'sp-version/std',
     'pallet-node-authorization/std',
+    'add-validator/std',
+	'pallet-session/std',
 ]

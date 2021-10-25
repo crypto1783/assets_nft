@@ -123,6 +123,7 @@ use super::*;
 		pub fn borrow_contract(origin: OriginFor<T>, contract_code: Vec<u8>, user: Vec<u8>) -> DispatchResultWithPostInfo {
 			
 			//Ok(().into())
+			ensure_signed(origin);
 			Ok(().into())
 		}
 

@@ -52,16 +52,5 @@
     "modify_block_num": "u32",
     "user": "Vec<u8>"
   }
-  pub struct ContractData<BlockNumber, AccountId> {
-    contract_code: Vec<u8>,
-    package_code: Vec<u8>,
-    warrant_list: Vec<Vec<u8>>,
-    status: Vec<u8>,
-    create_block_num: BlockNumber,
-    creater: AccountId,
-    modify_user: AccountId,
-    modify_block_num: BlockNumber,
-    user: Vec<u8>
-  }
 }
 

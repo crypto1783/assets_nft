@@ -6,6 +6,30 @@
     "configurations": [
         {
             "type": "lldb",
+            "request": "custom",
+            "name": "Custom launch",
+            "targetCreateCommands": [
+                "target create ${workspaceFolder}/<your program>"
+            ],
+            "processCreateCommands": [
+                "settings set target.run-args value1 value2 value3",
+                "process launch"
+            ]
+        },
+    {
+        "type": "lldb",
+        "request": "custom",
+        "name": "Custom launch",
+        "targetCreateCommands": [
+            "target create ${workspaceFolder}/target/debug/node-template>"
+        ],
+        "processCreateCommands": [
+            "settings set target.run-args value1 value2 value3",
+            "process launch"
+        ]
+    },
+        {
+            "type": "lldb",
             "request": "launch",
             "name": "Debug unit tests in library 'node-template'",
             "cargo": {
