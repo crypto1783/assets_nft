@@ -33,16 +33,7 @@ pub mod pallet {
 	#[pallet::generate_store(pub(super) trait Store)]
 	pub struct Pallet<T>(_);
 
-	// The pallet's runtime storage items.
-	// https://substrate.dev/docs/en/knowledgebase/runtime/storage
-	//#[pallet::storage]
-	//#[pallet::getter(fn something)]
-	// Learn more about declaring storage items:
-	// https://substrate.dev/docs/en/knowledgebase/runtime/storage#declaring-storage-items
-	//pub type Something<T> = StorageValue<_, u32>;
 
-	// Pallets use events to inform users when important changes are made..
-	// https://substrate.dev/docs/en/knowledgebase/runtime/events
 	#[pallet::event]
 	#[pallet::metadata(T::AccountId = "AccountId")]
 	#[pallet::generate_deposit(pub(super) fn deposit_event)]
@@ -101,7 +92,7 @@ pub mod pallet {
             Self::deposit_event(Event::TokenMinted(who, (cid, tid), metadata));
             Ok(().into())
 		}
-
+ 
         #[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
         pub fn create_class(origin: OriginFor<T>, class_name: Vec<u8>, class_data: ClassDataOf<T>) -> DispatchResultWithPostInfo
         {
