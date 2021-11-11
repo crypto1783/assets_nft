@@ -26,7 +26,7 @@ services:
     - --execution=NativeElseWasm
     - --rpc-methods=Unsafe
     - --unsafe-ws-external
-    - --bootnodes=/ip4/45.32.147.48/tcp/30334/p2p/12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2
+    - --bootnodes=/ip4/10.20.102.57/tcp/30333/p2p/12D3KooWBmAwcd4PJNJvfV89HwE48nwkRmAgo8Vy3uQEyNNHBox2
   fullnode:
     restart: always
     image: xiajianle/gwinode:v1.0
