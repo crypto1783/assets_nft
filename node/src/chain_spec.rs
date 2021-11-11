@@ -90,9 +90,9 @@ pub fn pub_testnet_config() -> Result<ChainSpec, String> {
 	prop.insert("tokenSymbol".to_string(), "Gcoin".into());
 	Ok(ChainSpec::from_genesis(
 		// Name
-		"GWI live net",
+		"GWI LIVE NET",
 		// ID
-		"GWI liveNet Id",
+		"GWI LIVE  Id",
 		ChainType::Live,
 		move || testnet_genesis(
 			wasm_binary,

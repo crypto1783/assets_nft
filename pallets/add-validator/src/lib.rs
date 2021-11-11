@@ -80,7 +80,7 @@ pub mod pallet {
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
 		pub fn add_validator(origin: OriginFor<T>, validator_id: T::AccountId) -> DispatchResultWithPostInfo {
 	
-			ensure_signed(origin)?;
+			ensure_root(origin)?;
 			let mut validators: Vec<T::AccountId>;
 
             if <Validators<T>>::get().is_none() {
