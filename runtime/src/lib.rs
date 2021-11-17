@@ -115,7 +115,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	//   `spec_version`, and `authoring_version` are the same between Wasm and native.
 	// This value is set to 100 to notify Polkadot-JS App (https://polkadot.js.org/apps) to use
 	//   the compatible custom types.
-	spec_version: 101,
+	spec_version: 105,
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
@@ -308,13 +308,19 @@ impl add_validator::Config for Runtime {
 	//type AddRemoveOrigin = EnsureRoot<AccountId>;
 }
 
+parameter_types! {
+	pub const Period: u32 = 2 * MINUTES;
+	pub const Offset: u32 = 0;
+}
+
 impl pallet_session::Config for Runtime {
 	type SessionHandler = <opaque::SessionKeys as OpaqueKeys>::KeyTypeIdProviders;
-	type ShouldEndSession = ValidatorSet;
+	//type ShouldEndSession = ValidatorSet;
+	type ShouldEndSession = pallet_session::PeriodicSessions<Period, Offset>;
 	type SessionManager = ValidatorSet;
 	type Event = Event;
 	type Keys = opaque::SessionKeys;
-	type NextSessionRotation = ValidatorSet;
+	type NextSessionRotation = pallet_session::PeriodicSessions<Period, Offset>;
 	type ValidatorId = <Self as frame_system::Config>::AccountId;
 	type ValidatorIdOf = add_validator::ValidatorOf<Self>;
 	type DisabledValidatorsThreshold = ();

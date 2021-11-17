@@ -81,6 +81,9 @@ pub mod pallet {
 		pub fn add_validator(origin: OriginFor<T>, validator_id: T::AccountId) -> DispatchResultWithPostInfo {
 	
 			ensure_root(origin)?;
+
+			//<Validators<T>>::mutate(|v| v.push(validator_id.clone()));
+			
 			let mut validators: Vec<T::AccountId>;
 
             if <Validators<T>>::get().is_none() {
@@ -91,14 +94,18 @@ pub mod pallet {
             }
 
             <Validators<T>>::put(validators);
-			pallet_session::Module::<T>::rotate_session();
+			//pallet_session::Module::<T>::rotate_session();
 
 			// Triggering rotate session again for the queued keys to take effect.
-            Flag::<T>::put(true);
+            //Flag::<T>::put(true);
 
-            Self::deposit_event(Event::ValidatorAdded(validator_id));
+            Self::deposit_event(Event::ValidatorAdded(validator_id.clone()));
+			log::debug!("add new validator : {:?} ", validator_id.clone());
 			Ok(().into())
 		}
+
+
+
 
  		/// Remove a validator using root/sudo privileges.
 		#[pallet::weight(0)]
@@ -149,15 +156,17 @@ impl<T: Config> Pallet<T> {
                 <Validators<T>>::put(validators);
             }
     }
+
+
 }
 
 /// Indicates to the session module if the session should be rotated.
 /// We set this flag to true when we add/remove a validator.
-impl<T: Config> pallet_session::ShouldEndSession<T::BlockNumber> for Pallet<T> {
-    fn should_end_session(_now: T::BlockNumber) -> bool {
-        Self::flag().unwrap()
-    }
-}
+// impl<T: Config> pallet_session::ShouldEndSession<T::BlockNumber> for Pallet<T> {
+//     fn should_end_session(_now: T::BlockNumber) -> bool {
+//         Self::flag().unwrap()
+//     }
+// }
 
 /// Provides the new set of validators to the session module when session is being rotated.
 impl<T: Config> pallet_session::SessionManager<T::AccountId> for Pallet<T> {

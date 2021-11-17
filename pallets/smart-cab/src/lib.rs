@@ -119,13 +119,13 @@ use super::*;
 			Ok(().into())
 		}
 
-		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
-		pub fn borrow_contract(origin: OriginFor<T>, contract_code: Vec<u8>, user: Vec<u8>) -> DispatchResultWithPostInfo {
+		// #[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
+		// pub fn borrow_contract(origin: OriginFor<T>, contract_code: Vec<u8>, user: Vec<u8>) -> DispatchResultWithPostInfo {
 			
-			//Ok(().into())
-			ensure_signed(origin);
-			Ok(().into())
-		}
+		// 	//Ok(().into())
+		// 	ensure_signed(origin);
+		// 	Ok(().into())
+		// }
 
 
 
