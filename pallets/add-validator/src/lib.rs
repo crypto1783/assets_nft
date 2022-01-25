@@ -91,16 +91,17 @@ pub mod pallet {
             } else {
                 validators = <Validators<T>>::get().unwrap();
                 validators.push(validator_id.clone());
+
             }
 
             <Validators<T>>::put(validators);
-			//pallet_session::Module::<T>::rotate_session();
+			pallet_session::Module::<T>::rotate_session();
 
 			// Triggering rotate session again for the queued keys to take effect.
             //Flag::<T>::put(true);
 
             Self::deposit_event(Event::ValidatorAdded(validator_id.clone()));
-			log::debug!("add new validator : {:?} ", validator_id.clone());
+			log::info!("add new validator : {:?} ", validator_id.clone());
 			Ok(().into())
 		}
 
@@ -151,6 +152,7 @@ pub mod pallet {
 
 impl<T: Config> Pallet<T> {
     fn initialize_validators(validators: &[T::AccountId]) {
+		log::info!("initialize_validators.{:?}", validators);
             if !validators.is_empty() {
                 assert!(<Validators<T>>::get().is_none(), "Validators are already initialized!");
                 <Validators<T>>::put(validators);
