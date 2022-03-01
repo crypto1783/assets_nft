@@ -115,7 +115,7 @@ pub const VERSION: RuntimeVersion = RuntimeVersion {
 	//   `spec_version`, and `authoring_version` are the same between Wasm and native.
 	// This value is set to 100 to notify Polkadot-JS App (https://polkadot.js.org/apps) to use
 	//   the compatible custom types.
-	spec_version: 105,
+	spec_version: 108,
 	impl_version: 1,
 	apis: RUNTIME_API_VERSIONS,
 	transaction_version: 1,
@@ -309,7 +309,7 @@ impl add_validator::Config for Runtime {
 }
 
 parameter_types! {
-	pub const Period: u32 = 2 * MINUTES;
+	pub const Period: u32 = 2 * MINUTES;//20u32
 	pub const Offset: u32 = 0;
 }
 
@@ -374,7 +374,7 @@ construct_runtime!(
 		Session: pallet_session::{Module, Call, Storage, Event, Config<T>},
 		ValidatorSet: add_validator::{Module, Call, Storage, Event<T>, Config<T>},
 		// ValidatorSet: add_validator::{Module, Call, Storage, Event<T>, Config<T>},
-		Aura: pallet_aura::{Module, Config<T>},
+		Aura: pallet_aura::{Module, Call, Storage, Config<T>},
 		Grandpa: pallet_grandpa::{Module, Call, Storage, Config, Event},
 		TransactionPayment: pallet_transaction_payment::{Module, Storage},
 		Sudo: pallet_sudo::{Module, Call, Config<T>, Storage, Event<T>},
