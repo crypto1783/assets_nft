@@ -5,13 +5,16 @@
 /// <https://substrate.dev/docs/en/knowledgebase/runtime/frame>
 
 pub use pallet::*;
-
+// use sp_runtime::print;
+//pub use log::info;
 #[frame_support::pallet]
 pub mod pallet {
+	// use log::info;
     use frame_support::{
 		pallet_prelude::*,
 		inherent::Vec
 	};
+	
 	use frame_support::{dispatch::DispatchResultWithPostInfo};
 	use frame_system::pallet_prelude::*;
 
@@ -79,19 +82,19 @@ pub mod pallet {
 		/// storage and emits an event. This function must be dispatched by a signed extrinsic.
 		#[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
 		pub fn mint(origin: OriginFor<T>, cid: ClassIdOf<T>, metadata: Vec<u8>, data: TokenDataOf<T>) -> DispatchResultWithPostInfo {
-
+			
             let who = ensure_signed(origin)?;
-            //这里的<T>的用法？
             let class = orml_nft::Pallet::<T>::classes(cid).ok_or(Error::<T>::ClassNotExists)?;
 
-            if class.owner != who {
-                return Err(Error::<T>::NotClassOwner)?
-            }
-
+            // if class.owner != who {
+            //     return Err(Error::<T>::NotClassOwner)?
+            // }
             let tid = orml_nft::Pallet::<T>::mint(&who, cid, metadata.clone(), data).map_err(|_| Error::<T>::MintError)?;
+
             Self::deposit_event(Event::TokenMinted(who, (cid, tid), metadata));
+
             Ok(().into())
-		}
+		}	
  
         #[pallet::weight(10_000 + T::DbWeight::get().writes(1))]
         pub fn create_class(origin: OriginFor<T>, class_name: Vec<u8>, class_data: ClassDataOf<T>) -> DispatchResultWithPostInfo
